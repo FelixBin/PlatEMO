@@ -59,7 +59,7 @@ classdef SOLUTION < handle
         %       Population = SOLUTION(PopDec)
         
             if nargin > 0
-                obj(1,size(PopDec,1)) = SOLUTION;
+                obj(1,size(PopDec,1)) = SOLUTION;%把行转成列
                 Problem = PROBLEM.Current();
                 PopDec  = Problem.CalDec(PopDec);
                 PopObj  = Problem.CalObj(PopDec);

@@ -109,9 +109,11 @@ classdef ALGORITHM < handle & matlab.mixin.Heterogeneous
         
             obj.metric.runtime = obj.metric.runtime + toc;
             if obj.save <= 0; num = 10; else; num = obj.save; end
+            disp(obj.pro.FE)
             index = max(1,min(min(num,size(obj.result,1)+1),ceil(num*obj.pro.FE/obj.pro.maxFE)));
             obj.result(index,:) = {obj.pro.FE,Population};
             drawnow(); obj.outputFcn(obj,obj.pro);
+            
             nofinish = obj.pro.FE < obj.pro.maxFE;
             assert(nofinish,'PlatEMO:Termination',''); tic;
         end
@@ -127,7 +129,7 @@ classdef ALGORITHM < handle & matlab.mixin.Heterogeneous
         %       [p1,p2,p3] = obj.ParameterSet(1,2,3)
 
             varargout = varargin;
-            specified = ~cellfun(@isempty,obj.parameter);
+            specified = ~cellfun(@isempty,obj.parameter);%~表示取反
             varargout(specified) = obj.parameter(specified);
         end
     end
